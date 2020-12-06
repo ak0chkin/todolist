@@ -9,7 +9,9 @@ const validate = values => {
     if (!values['priority']) {
         errors['priority'] = 'Приоритет не может быть пустым';
     }
-
+    if (!values['responsible']) {
+        errors['responsible'] = 'Ответственный не может быть пустым';
+    }
     return errors;
 }
 

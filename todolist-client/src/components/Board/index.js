@@ -37,8 +37,7 @@ export default class Board extends React.Component {
 
     handleClose() {
         this.setState({
-            showModal: false,
-            taskToUpdate: {}
+            showModal: false
         })
     }
 
@@ -66,7 +65,9 @@ export default class Board extends React.Component {
                 'message': error.response.data.message
             })
         }
-    }async handleUpdate(values) {
+    }
+
+    async handleUpdate(values) {
         try {
             const response = await TaskService.update(values);
             const message = response.data.message;

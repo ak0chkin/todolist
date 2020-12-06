@@ -9,20 +9,33 @@ const bcrypt = require("bcryptjs");
 exports.signup = async (request, response) => {
     try {
         const result = await db.sequelize.transaction(async (transaction) => {
+            const head = await User.findOne({
+                where: {
+                    username: request.body.head ? request.body.head : null
+                },
+                transaction
+            });
+            if (!head && request.body.head) {
+                response.status(404);
+                throw new Error("Руководитель не найден.");
+            }
             const user = await User.create({
                     surname: request.body.surname,
                     name: request.body.name,
                     patronymic: request.body.patronymic,
                     username: request.body.username,
                     password: bcrypt.hashSync(request.body.password, 8),
-                    headId: request.body.headId
+                    headId: head ? head.id : null
                 },
                 {transaction});
             return user;
         });
-        response.status(200).send({message: "Пользователь успешно зарегистрирован!", result})
+        response.status(200).send({message: "Пользователь успешно зарегистрирован!"})
     } catch (error) {
-        response.status(500).send({message: error.message});
+        if (response.statusCode === 200) {
+            response.status(500);
+        }
+        response.send({message: error.message});
     }
 };
 
@@ -32,7 +45,8 @@ exports.signin = async (request, response) => {
             const user = await User.findOne({
                 where: {
                     username: request.body.username
-                }
+                },
+                transaction
             });
             return user;
         });
@@ -52,7 +66,7 @@ exports.signin = async (request, response) => {
         }
 
         const token = jwt.sign({id: result.id}, config.secret, {
-            expiresIn: 86400 // 24 hours
+            expiresIn: 86400
         });
         response.status(200).send({
             ...result.dataValues,

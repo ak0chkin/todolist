@@ -14,17 +14,17 @@ exports.create = async (request, response) => {
             });
             if (!creator) {
                 response.status(404);
-                throw new Error("Создатель не найден")
+                throw new Error("Создатель не найден.")
             }
             const responsible = await User.findOne({
                 where: {
-                    id: request.body.responsibleId
+                    username: request.body.responsible
                 },
                 transaction
             });
             if (!responsible) {
                 response.status(404);
-                throw new Error("Ответственный не найден")
+                throw new Error("Ответственный не найден.")
             }
             return await Task.create({
                     title: request.body.title,
@@ -39,7 +39,7 @@ exports.create = async (request, response) => {
         });
         response.status(200).send({message: "Задача успешно создана!", result});
     } catch (error) {
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
             response.status(500);
         }
         response.send({message: error.message});
@@ -59,13 +59,23 @@ exports.update = async (request, response) => {
                 response.status(404);
                 throw new Error("Задача не найдена.");
             }
+            const responsible = await User.findOne({
+                where: {
+                    username: request.body.responsible
+                },
+                transaction
+            });
+            if (!responsible) {
+                response.status(404);
+                throw new Error("Ответственный не найден.")
+            }
             await task.update({
                     title: request.body.title,
                     description: request.body.description,
                     expiresAt: request.body.expiresAt,
                     priority: request.body.priority,
                     status: request.body.status,
-                    responsibleId: request.body.responsibleId
+                    responsibleId: responsible.id
                 },
                 {
                     transaction
@@ -74,7 +84,7 @@ exports.update = async (request, response) => {
         });
         response.status(200).send({message: "Задача успешно обновлена!"});
     } catch (error) {
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
             response.status(500);
         }
         response.send({message: error.message});
@@ -98,7 +108,7 @@ exports.get = async (request, response) => {
         });
         response.status(200).send(result);
     } catch (error) {
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
             response.status(500);
         }
         response.send({message: error.message});
@@ -119,7 +129,7 @@ exports.getAll = async (request, response) => {
         });
         response.status(200).send(result);
     } catch (error) {
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
             response.status(500);
         }
         response.send({message: error.message});

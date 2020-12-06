@@ -12,26 +12,26 @@ export default function TaskForm(props) {
             <form className="form-task" onSubmit={handleSubmit}>
                 {!successful && (
                     <>
-                        <Field component="input" type="hidden" name="id" defaultValue={taskToUpdate && taskToUpdate.id}/>
+                        <Field component="input" type="hidden" name="id" initialValue={taskToUpdate && taskToUpdate.id}/>
                         <Row>
-                            <Field name="title" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.title} label="Заголовок"/>
+                            <Field name="title" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.title} label="Заголовок"/>
                         </Row>
                         <Row>
-                            <Field name="description" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.description} label="Описание"/>
+                            <Field name="description" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.description} label="Описание"/>
                         </Row>
                         <Row>
-                            <Field name="expiresAs" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.expiresAt} label="Дата окончания"/>
+                            <Field name="expiresAs" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.expiresAt} label="Дата окончания"/>
                         </Row>
                         <Row>
-                            <Field name="priority" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.priority} label="Приоритет"/>
+                            <Field name="priority" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.priority} label="Приоритет"/>
                         </Row>
                         {taskToUpdate && (
                             <Row>
-                                <Field name="status" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.status} label="Статус"/>
+                                <Field name="status" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.status} label="Статус"/>
                             </Row>
                         )}
                         <Row>
-                            <Field name="responsibleId" component={renderField} type="text" defaultValue={taskToUpdate && taskToUpdate.responsibleId} label="Ответственный"/>
+                            <Field name="responsible" component={renderField} type="text" initialValue={taskToUpdate && taskToUpdate.responsible.username} label="Ответственный"/>
                         </Row>
                     </>
                 )}
