@@ -3,14 +3,16 @@ import TaskService from "../../services/task.service";
 import AuthService from "../../services/auth.service";
 import TaskModal from "../Task";
 import {Button, Container, Table} from "react-bootstrap";
+import "./index.css"
 
 export default class Board extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            tasks: [],
             currentUser: AuthService.getCurrentUser(),
+            tasks: [],
+            taskToUpdate: {},
             showModal: false,
             message: '',
             successful: false
@@ -18,6 +20,7 @@ export default class Board extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -34,22 +37,39 @@ export default class Board extends React.Component {
 
     handleClose() {
         this.setState({
-            showModal: false
+            showModal: false,
+            taskToUpdate: {}
         })
     }
 
-    handleShow() {
-        this.setState({
+    handleShow(id) {
+        this.setState(state => ({
             showModal: true,
             message: '',
-            successful: false
-        })
+            successful: false,
+            taskToUpdate: id ? state.tasks.find(item => item.id === id) : {}
+        }));
     }
 
     async handleCreate(values) {
         try {
-            const task = await TaskService.create({...values, 'creator': this.state.currentUser.id});
-            const message = task.data.message;
+            const response = await TaskService.create({...values, 'creatorId': this.state.currentUser.id});
+            const message = response.data.message;
+            const tasks = await TaskService.getAll(this.state.currentUser);
+            this.setState({
+                tasks: tasks.data,
+                message: message,
+                successful: true
+            })
+        } catch (error) {
+            this.setState({
+                'message': error.response.data.message
+            })
+        }
+    }async handleUpdate(values) {
+        try {
+            const response = await TaskService.update(values);
+            const message = response.data.message;
             const tasks = await TaskService.getAll(this.state.currentUser);
             this.setState({
                 tasks: tasks.data,
@@ -64,18 +84,21 @@ export default class Board extends React.Component {
     }
 
     render() {
-        const tasks = this.state.tasks.map(({id, title, priority, expiresAt, responsibleId, status}) => (
+        const tasks = this.state.tasks.map(({id, title, priority, expiresAt, responsible, status}) => (
             <tr key={id}>
-                <th scope="row">{title}</th>
+                <th scope="row"><Button variant="link" onClick={() => {
+                    this.handleShow(id)
+                }}>{title}</Button></th>
                 <td>{priority}</td>
                 <td>{expiresAt}</td>
-                <td>{responsibleId}</td>
+                <td>{responsible.username}</td>
                 <td>{status}</td>
             </tr>
         ));
         return (
             <>
-                <TaskModal handleSubmit={this.handleCreate} handleClose={this.handleClose}
+                <TaskModal handleSubmit={this.state.taskToUpdate ? this.handleUpdate : this.handleCreate}
+                           handleClose={this.handleClose} taskToUpdate={this.state.taskToUpdate}
                            show={this.state.showModal}
                            message={this.state.message} successful={this.state.successful}/>
                 <Container>
@@ -95,7 +118,7 @@ export default class Board extends React.Component {
                         </tbody>
                     </Table>
                     <Button variant="primary" onClick={this.handleShow}>
-                        Создать задачу
+                        Новая задача
                     </Button>
                 </Container>
             </>

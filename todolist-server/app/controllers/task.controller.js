@@ -8,7 +8,7 @@ exports.create = async (request, response) => {
         const result = await db.sequelize.transaction(async (transaction) => {
             const creator = await User.findOne({
                 where: {
-                    id: request.body.creator
+                    id: request.body.creatorId
                 },
                 transaction
             });
@@ -18,7 +18,7 @@ exports.create = async (request, response) => {
             }
             const responsible = await User.findOne({
                 where: {
-                    id: request.body.responsible
+                    id: request.body.responsibleId
                 },
                 transaction
             });
@@ -31,7 +31,7 @@ exports.create = async (request, response) => {
                     description: request.body.description,
                     expiresAt: request.body.expiresAt,
                     priority: request.body.priority,
-                    status: request.body.status,
+                    status: 0,
                     creatorId: creator.id,
                     responsibleId: responsible.id
                 },
@@ -59,22 +59,20 @@ exports.update = async (request, response) => {
                 response.status(404);
                 throw new Error("Задача не найдена.");
             }
-            await Task.update({
+            await task.update({
                     title: request.body.title,
                     description: request.body.description,
                     expiresAt: request.body.expiresAt,
                     priority: request.body.priority,
-                    status: request.body.status
+                    status: request.body.status,
+                    responsibleId: request.body.responsibleId
                 },
                 {
-                    where: {
-                        id: request.query.id
-                    },
                     transaction
                 });
             return task;
         });
-        response.status(200).send({message: "Задача успешно обновлена!", result});
+        response.status(200).send({message: "Задача успешно обновлена!"});
     } catch (error) {
         if (response.status === 200) {
             response.status(500);
@@ -86,7 +84,7 @@ exports.update = async (request, response) => {
 exports.get = async (request, response) => {
     try {
         const result = await db.sequelize.transaction(async (transaction) => {
-            const task =  await Task.findOne({
+            const task = await Task.findOne({
                 where: {
                     id: request.query.id
                 },
@@ -115,7 +113,8 @@ exports.getAll = async (request, response) => {
                     {creatorId: request.query.userId},
                     {responsibleId: request.query.userId}
                 ),
-                transaction
+                transaction,
+                include: [{model: User, as: "responsible", attributes: ["username"]}]
             });
         });
         response.status(200).send(result);

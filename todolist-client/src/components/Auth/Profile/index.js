@@ -30,9 +30,9 @@ export default class Profile extends React.Component {
                     <strong>Token:</strong>{" "}
                     {currentUser.accessToken}
                 </p>
-                {currentUser.head && <p>
+                {currentUser.headId && <p>
                     <strong>Руководитель:</strong>{" "}
-                    {currentUser.head}
+                    {currentUser.headId}
                 </p>}
             </Container>
         );

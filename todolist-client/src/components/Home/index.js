@@ -1,5 +1,4 @@
 import React from "react";
-
 import UserService from "../../services/user.service";
 
 export default class Home extends React.Component {

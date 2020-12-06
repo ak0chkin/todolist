@@ -55,7 +55,7 @@ export default class Register extends React.Component {
                                 <Field name="password" component={renderField} type="password" label="Пароль"/>
                             </Row>
                             <Row>
-                                <Field name="head" component={renderField} type="text" label="Руководитель"/>
+                                <Field name="headId" component={renderField} type="text" label="Руководитель"/>
                             </Row>
                         </>
                     )}

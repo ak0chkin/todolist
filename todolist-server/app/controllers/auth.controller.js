@@ -15,7 +15,7 @@ exports.signup = async (request, response) => {
                     patronymic: request.body.patronymic,
                     username: request.body.username,
                     password: bcrypt.hashSync(request.body.password, 8),
-                    headId: request.body.head
+                    headId: request.body.headId
                 },
                 {transaction});
             return user;
