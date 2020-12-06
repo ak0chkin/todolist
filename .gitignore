@@ -9,3 +9,7 @@
 
 # production
 /todolist-client/build
+
+/todolist-server/.idea/
+/todolist-client/.idea/
+/.idea/
