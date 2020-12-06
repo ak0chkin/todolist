@@ -1,7 +1,5 @@
 # dependencies
 /todolist-server/node_modules/
-/todolist-server/.idea/
-/todolist-client/.idea/
 /todolist-client/node_modules/
 
 # testing
@@ -9,3 +7,7 @@
 
 # production
 /todolist-client/build
+
+/todolist-server/.idea/
+/todolist-client/.idea/
+/.idea/
