@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a877a29c-feee-41f0-b3aa-d6ee9a4aa178" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/todolist-client/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/.eslintcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/App/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/App/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/App/index.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Login/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Login/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Login/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Profile/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Profile/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Register/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Register/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Auth/Register/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Board/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Board/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Field/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Field/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Home/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Home/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Task/Form/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Task/Form/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Task/Form/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Task/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/components/Task/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/reportWebVitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/services/auth-header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/services/auth.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/services/task.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/services/user.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-client/src/setupTests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/config/auth.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/config/db.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/controllers/auth.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/controllers/task.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/controllers/user.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/middleware/authJwt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/middleware/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/middleware/verifySignUp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/models/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/models/task.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/models/user.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/routes/auth.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/routes/task.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/app/routes/user.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist-server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/hello.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Home.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lCl5saRIkezxm4GAiEkvTyH71M" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a877a29c-feee-41f0-b3aa-d6ee9a4aa178" name="Default Changelist" comment="" />
+      <created>1607108774691</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607108774691</updated>
+      <workItem from="1607108776495" duration="14000" />
+      <workItem from="1607265452396" duration="188000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1180" y="278" key="FileChooserDialogImpl" timestamp="1607108789139">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="278" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607108789139" />
+  </component>
+</project>
