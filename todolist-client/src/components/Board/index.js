@@ -85,11 +85,12 @@ export default class Board extends React.Component {
     }
 
     render() {
-        const tasks = this.state.tasks.map(({id, title, priority, expiresAt, responsible, status}) => (
-            <tr key={id}>
-                <th scope="row"><Button variant="link" onClick={() => {
-                    this.handleShow(id)
-                }}>{title}</Button></th>
+        const {tasks, taskToUpdate, showModal, message, successful} = this.state;
+        const taskRows = tasks.map(({id, title, priority, expiresAt, responsible, status}) => (
+            <tr key={id} onClick={() => {
+                this.handleShow(id)
+            }}>
+                <th scope="row">{title}</th>
                 <td>{priority}</td>
                 <td>{expiresAt}</td>
                 <td>{responsible.username}</td>
@@ -97,32 +98,30 @@ export default class Board extends React.Component {
             </tr>
         ));
         return (
-            <>
-                <TaskModal handleSubmit={this.state.taskToUpdate ? this.handleUpdate : this.handleCreate}
+            <Container>
+                <TaskModal handleSubmit={taskToUpdate ? this.handleUpdate : this.handleCreate}
                            handleClose={this.handleClose} taskToUpdate={this.state.taskToUpdate}
-                           show={this.state.showModal}
-                           message={this.state.message} successful={this.state.successful}/>
-                <Container>
-                    <h3>Задачи</h3>
-                    <Table bordered>
-                        <thead>
-                        <tr>
-                            <th scope="col">Заголовок</th>
-                            <th scope="col">Приоритет</th>
-                            <th scope="col">Дата окончания</th>
-                            <th scope="col">Ответственный</th>
-                            <th scope="col">Статус</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {tasks.length !== 0 && tasks}
-                        </tbody>
-                    </Table>
-                    <Button variant="primary" onClick={this.handleShow}>
-                        Новая задача
-                    </Button>
-                </Container>
-            </>
+                           show={showModal}
+                           message={message} successful={successful}/>
+                <h3>Задачи:</h3>
+                <Table bordered hover>
+                    <thead>
+                    <tr>
+                        <th scope="col">Заголовок</th>
+                        <th scope="col">Приоритет</th>
+                        <th scope="col">Дата окончания</th>
+                        <th scope="col">Ответственный</th>
+                        <th scope="col">Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {taskRows.length !== 0 && taskRows}
+                    </tbody>
+                </Table>
+                <Button variant="primary" onClick={this.handleShow}>
+                    Новая задача
+                </Button>
+            </Container>
         );
     }
 }

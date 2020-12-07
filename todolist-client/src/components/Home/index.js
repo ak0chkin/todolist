@@ -14,24 +14,22 @@ export default class Home extends React.Component {
         UserService.getPublicContent().then(
             response => {
                 this.setState({
-                    content: response.data
+                    content: response.data.content
                 });
             },
             error => {
                 this.setState({
-                    content:
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString()
+                    content: error.response.data.message
                 });
             }
         );
     }
 
     render() {
+        const {content} = this.state;
         return (
             <div className="container">
-                <h3>{this.state.content}</h3>
+                <h3>{content}</h3>
             </div>
         );
     }

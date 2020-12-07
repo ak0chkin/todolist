@@ -1,14 +1,13 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
-const Task = db.task;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = async (request, response) => {
     try {
-        const result = await db.sequelize.transaction(async (transaction) => {
+        await db.sequelize.transaction(async (transaction) => {
             const head = await User.findOne({
                 where: {
                     username: request.body.head ? request.body.head : null
@@ -19,7 +18,7 @@ exports.signup = async (request, response) => {
                 response.status(404);
                 throw new Error("Руководитель не найден.");
             }
-            const user = await User.create({
+            return await User.create({
                     surname: request.body.surname,
                     name: request.body.name,
                     patronymic: request.body.patronymic,
@@ -28,7 +27,6 @@ exports.signup = async (request, response) => {
                     headId: head ? head.id : null
                 },
                 {transaction});
-            return user;
         });
         response.status(200).send({message: "Пользователь успешно зарегистрирован!"})
     } catch (error) {
@@ -42,13 +40,12 @@ exports.signup = async (request, response) => {
 exports.signin = async (request, response) => {
     try {
         const result = await db.sequelize.transaction(async (transaction) => {
-            const user = await User.findOne({
+            return await User.findOne({
                 where: {
                     username: request.body.username
                 },
                 transaction
             });
-            return user;
         });
         if (!result) {
             return response.status(404).send({message: "Пользователь не найден."});
@@ -69,7 +66,6 @@ exports.signin = async (request, response) => {
             expiresIn: 86400
         });
         response.status(200).send({
-            ...result.dataValues,
             accessToken: token
         });
     } catch (error) {
