@@ -4,9 +4,10 @@ import validate from "./validate";
 import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
 import {renderField} from "../../Field";
+import {connect} from "react-redux";
 
-export default function TaskForm(props) {
-    const {handleSubmit, taskToUpdate, message, successful} = props;
+function TaskForm(props) {
+    const {handleSubmit, taskToUpdate, successful, message} = props;
     return (
         <Form onSubmit={handleSubmit} validate={validate} render={({handleSubmit}) => (
             <form className="form-task" onSubmit={handleSubmit}>
@@ -49,3 +50,12 @@ export default function TaskForm(props) {
         )}/>
     );
 }
+
+function mapStateToProps(state) {
+    const { message } = state.message;
+    return {
+        message,
+    };
+}
+
+export default connect(mapStateToProps)(TaskForm);

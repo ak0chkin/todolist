@@ -1,32 +1,25 @@
 import React from "react";
-import {Link, Route, Switch} from "react-router-dom";
+import {Link, Route, Switch, withRouter} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
-import AuthService from "../../services/auth.service";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import Profile from "../Auth/Profile";
 import Home from "../Home";
 import Board from "../Board";
 import './index.css';
+import {connect} from "react-redux";
+import {logout} from "../../actions/auth";
+import {clearMessage} from "../../actions/message";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.logOut = this.logOut.bind(this);
-
-        this.state = {
-            currentUser: AuthService.getCurrentUser()
-        };
+function App(props) {
+    const {user: currentUser} = props;
+    function logOut() {
+        props.dispatch(logout());
     }
-
-    logOut() {
-        AuthService.logout();
-    }
-
-    render() {
-        const {currentUser} = this.state;
-
-        return (
+    props.history.listen(() => {
+        props.dispatch(clearMessage());
+    });
+    return (
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <Link to={"/"} className="navbar-brand">
@@ -56,7 +49,7 @@ class App extends React.Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a href={"/login"} className="nav-link" onClick={this.logOut}>
+                                <a href={"/login"} className="nav-link" onClick={logOut}>
                                     Выйти
                                 </a>
                             </li>
@@ -88,8 +81,14 @@ class App extends React.Component {
                     </Switch>
                 </div>
             </div>
-        );
-    }
+    );
 }
 
-export default App;
+function mapStateToProps(state) {
+    const {user} = state.auth;
+    return {
+        user,
+    };
+}
+
+export default connect(mapStateToProps)(withRouter(App));

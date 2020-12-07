@@ -66,6 +66,7 @@ exports.signin = async (request, response) => {
             expiresIn: 86400
         });
         response.status(200).send({
+            ...result.dataValues,
             accessToken: token
         });
     } catch (error) {

@@ -1,40 +1,44 @@
 import React from "react";
-import AuthService from "../../../services/auth.service";
 import {Container} from "react-bootstrap";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-export default class Profile extends React.Component {
-    constructor(props) {
-        super(props);
+function Profile(props) {
+    const {user: currentUser} = props;
 
-        this.state = {
-            currentUser: AuthService.getCurrentUser()
-        };
+    if (!currentUser) {
+        return <Redirect to="/login"/>;
     }
-
-    render() {
-        const {currentUser} = this.state;
-        return (
-            <Container>
-                <h3>
-                    <strong>{currentUser.surname} {currentUser.name} {currentUser.patronymic ? currentUser.patronymic : ''}</strong>
-                </h3>
-                <p>
-                    <strong>Имя пользователя:</strong>{" "}
-                    {currentUser.username}
-                </p>
-                <p>
-                    <strong>Идентификатор:</strong>{" "}
-                    {currentUser.id}
-                </p>
-                <p>
-                    <strong>Token:</strong>{" "}
-                    {currentUser.accessToken}
-                </p>
-                {currentUser.headId && <p>
-                    <strong>Руководитель:</strong>{" "}
-                    {currentUser.headId}
-                </p>}
-            </Container>
-        );
-    }
+    return (
+        <Container>
+            <h3>
+                <strong>{currentUser.surname} {currentUser.name} {currentUser.patronymic ? currentUser.patronymic : ''}</strong>
+            </h3>
+            <p>
+                <strong>Имя пользователя:</strong>{" "}
+                {currentUser.username}
+            </p>
+            <p>
+                <strong>Идентификатор:</strong>{" "}
+                {currentUser.id}
+            </p>
+            <p>
+                <strong>Token:</strong>{" "}
+                {currentUser.accessToken}
+            </p>
+            {currentUser.headId && <p>
+                <strong>Руководитель:</strong>{" "}
+                {currentUser.headId}
+            </p>}
+        </Container>
+    );
 }
+
+function mapStateToProps(state) {
+    const {user} = state.auth;
+    return {
+        user,
+    };
+}
+
+export default connect(mapStateToProps)(Profile);

@@ -1,54 +1,55 @@
 import React from "react";
-import AuthService from "../../../services/auth.service";
 import {Field, Form} from "react-final-form";
 import validate from "./validate";
 import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
 import {renderField} from "../../Field";
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {login} from "../../../actions/auth";
 
-export default class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            'message': ''
-        }
-        this.handleLogin = this.handleLogin.bind(this);
+function Login(props) {
+    const {isLoggedIn, message} = props;
+
+    async function handleLogin(values) {
+        const {dispatch} = props;
+        dispatch(login(values))
+            .catch(() => {});
     }
 
-    async handleLogin(values) {
-        AuthService.login(values)
-            .then(() => {
-                    window.location.href = "/board";
-                },
-                error => {
-                    this.setState({
-                        loading: false,
-                        message: error.response.data.message
-                    });
-                }
-            );
+    if (isLoggedIn) {
+        return <Redirect to="/board"/>;
     }
 
-    render() {
-        return (
-            <Form onSubmit={this.handleLogin} validate={validate} render={({handleSubmit}) => (
-                <form className="form-signin" onSubmit={handleSubmit}>
-                    <Row>
-                        <Field name="username" component={renderField} type="text" label="Имя пользователя"/>
-                    </Row>
-                    <Row>
-                        <Field name="password" component={renderField} type="password" label="Пароль"/>
-                    </Row>
-                    {this.state.message && (
-                        <FormGroup>
-                            <Alert variant="danger">
-                                {this.state.message}
-                            </Alert>
-                        </FormGroup>
-                    )}
-                    <Button type="submit" variant="primary" block>Войти</Button>
-                </form>
-            )}/>
-        );
-    }
+    return (
+        <Form onSubmit={handleLogin} validate={validate} render={({handleSubmit}) => (
+            <form className="form-signin" onSubmit={handleSubmit}>
+                <Row>
+                    <Field name="username" component={renderField} type="text" label="Имя пользователя"/>
+                </Row>
+                <Row>
+                    <Field name="password" component={renderField} type="password" label="Пароль"/>
+                </Row>
+                {message && (
+                    <FormGroup>
+                        <Alert variant="danger">
+                            {message}
+                        </Alert>
+                    </FormGroup>
+                )}
+                <Button type="submit" variant="primary" block>Войти</Button>
+            </form>
+        )}/>
+    );
 }
+
+function mapStateToProps(state) {
+    const { isLoggedIn } = state.auth;
+    const { message } = state.message;
+    return {
+        isLoggedIn,
+        message
+    };
+}
+
+export default connect(mapStateToProps)(Login);
