@@ -3,7 +3,7 @@ import {Field, Form} from "react-final-form";
 import validate from "./validate";
 import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
-import {renderField} from "../../Field";
+import {inputAdapter} from "../../Fields";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {login} from "../../../actions/auth";
@@ -14,7 +14,8 @@ function Login(props) {
     async function handleLogin(values) {
         const {dispatch} = props;
         dispatch(login(values))
-            .catch(() => {});
+            .catch(() => {
+            });
     }
 
     if (isLoggedIn) {
@@ -25,10 +26,10 @@ function Login(props) {
         <Form onSubmit={handleLogin} validate={validate} render={({handleSubmit}) => (
             <form className="form-signin" onSubmit={handleSubmit}>
                 <Row>
-                    <Field name="username" component={renderField} type="text" label="Имя пользователя"/>
+                    <Field name="username" component={inputAdapter} type="text" label="Имя пользователя"/>
                 </Row>
                 <Row>
-                    <Field name="password" component={renderField} type="password" label="Пароль"/>
+                    <Field name="password" component={inputAdapter} type="password" label="Пароль"/>
                 </Row>
                 {message && (
                     <FormGroup>
@@ -44,8 +45,8 @@ function Login(props) {
 }
 
 function mapStateToProps(state) {
-    const { isLoggedIn } = state.auth;
-    const { message } = state.message;
+    const {isLoggedIn} = state.auth;
+    const {message} = state.message;
     return {
         isLoggedIn,
         message

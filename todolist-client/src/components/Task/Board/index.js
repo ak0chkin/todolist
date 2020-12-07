@@ -1,11 +1,13 @@
 import React, {useLayoutEffect, useState} from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router";
-import TaskModal from "../Task";
-import {create, getAll, update} from "../../actions/task";
+import TaskModal from "../Modal";
+import {create, getAll, update} from "../../../actions/task";
 import {Button, Container, Table} from "react-bootstrap";
 import "./index.css"
-import {clearMessage} from "../../actions/message";
+import {clearMessage} from "../../../actions/message";
+import moment from "moment";
+import {priorities, statuses} from "../../../constants/dropDowns";
 
 function Board(props) {
     const [taskToUpdate, setTaskToUpdate] = useState({});
@@ -67,10 +69,10 @@ function Board(props) {
             handleShow(id)
         }}>
             <th scope="row">{title}</th>
-            <td>{priority}</td>
-            <td>{expiresAt}</td>
+            <td>{priorities[priority]}</td>
+            <td>{moment(expiresAt).format("DD/MM/yyyy")}</td>
             <td>{responsible.username}</td>
-            <td>{status}</td>
+            <td>{statuses[status]}</td>
         </tr>
     ));
     return (

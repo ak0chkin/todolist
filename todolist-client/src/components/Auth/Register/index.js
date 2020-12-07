@@ -3,7 +3,7 @@ import {Field, Form} from "react-final-form";
 import validate from "./validate";
 import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
-import {renderField} from "../../Field";
+import {inputAdapter} from "../../Fields";
 import {register} from "../../../actions/auth";
 import {connect} from "react-redux";
 
@@ -28,22 +28,22 @@ function Register(props) {
                 {!successful && (
                     <>
                         <Row>
-                            <Field className="col-4" name="surname" component={renderField}
+                            <Field name="surname" component={inputAdapter}
                                    type="text" label="Фамилия"/>
-                            <Field className="col-4" name="name" component={renderField} type="text"
+                            <Field name="name" component={inputAdapter} type="text"
                                    label="Имя"/>
-                            <Field className="col-4" name="patronymic" component={renderField} type="text"
+                            <Field name="patronymic" component={inputAdapter} type="text"
                                    label="Отчество"/>
                         </Row>
                         <Row>
-                            <Field name="username" component={renderField} type="text"
+                            <Field name="username" component={inputAdapter} type="text"
                                    label="Имя пользователя"/>
                         </Row>
                         <Row>
-                            <Field name="password" component={renderField} type="password" label="Пароль"/>
+                            <Field name="password" component={inputAdapter} type="password" label="Пароль"/>
                         </Row>
                         <Row>
-                            <Field name="head" component={renderField} type="text" label="Руководитель"/>
+                            <Field name="head" component={inputAdapter} type="text" label="Руководитель"/>
                         </Row>
                     </>
                 )}

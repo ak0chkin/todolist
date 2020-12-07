@@ -13,21 +13,24 @@ class TaskService {
             responsible
         });
     }
+
     update({id, title, description, expiresAt, priority, status, responsible}) {
+        console.log(expiresAt)
         return axios.put(API_URL + "update", {
-            title,
-            description,
-            expiresAt,
-            priority,
-            status,
-            responsible
-        },
+                title,
+                description,
+                expiresAt,
+                priority,
+                status,
+                responsible
+            },
             {
                 params: {
                     id
                 }
             });
     }
+
     getAll({id}) {
         return axios.get(API_URL + "getAll", {
             params: {

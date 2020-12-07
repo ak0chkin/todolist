@@ -1,5 +1,5 @@
 import React from "react";
-import TaskForm from "./Form";
+import TaskForm from "../Form";
 import {Modal} from "react-bootstrap";
 
 export default function TaskModal(props) {

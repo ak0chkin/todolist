@@ -1,9 +1,10 @@
 import React from "react";
+import {Container} from "react-bootstrap";
 
 export default function Home() {
     return (
-        <div className="container">
+        <Container>
             <h3>Содержимое, доступное всем.</h3>
-        </div>
+        </Container>
     );
 }
