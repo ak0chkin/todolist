@@ -6,6 +6,9 @@ const validate = values => {
     if (!values['description']) {
         errors['description'] = 'Описание не может быть пустым';
     }
+    if (!values['expiresAt']) {
+        errors['expiresAt'] = 'Дата окончания не может быть пустой';
+    }
     if (!values['priority']) {
         errors['priority'] = 'Приоритет не может быть пустым';
     }

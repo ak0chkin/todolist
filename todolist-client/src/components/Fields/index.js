@@ -21,7 +21,7 @@ export const selectAdapter = ({input, label, options, meta: {touched, error}, ..
     <Col>
         <FormGroup>
             <FormLabel htmlFor={input.name}>{label}</FormLabel>
-            <FormControl as="select" {...input} {...rest} searchable>{options}</FormControl>
+            <FormControl as="select" {...input} {...rest}>{options}</FormControl>
             {touched && error && <span className="form-group__error">{error}</span>}
         </FormGroup>
     </Col>

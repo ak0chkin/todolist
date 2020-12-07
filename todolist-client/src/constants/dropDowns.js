@@ -25,6 +25,7 @@ export const priorities = {
 
 export const priorityOptions = (
     <>
+        <option style={{display: 'none'}}/>
         <option value="0">1</option>
         <option value="1">2</option>
         <option value="2">3</option>
