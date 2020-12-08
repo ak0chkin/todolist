@@ -5,13 +5,14 @@ import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
 import {inputAdapter} from "../../Fields";
 import {register} from "../../../actions/auth";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 function Register(props) {
+    const dispatch = useDispatch();
+    const {message} = useSelector(state => state.message)
     const [successful, setSuccessful] = useState(false);
 
-    async function handleRegister(values) {
-        const {dispatch} = props;
+    function handleRegister(values) {
         dispatch(register(values))
             .then(() => {
                 setSuccessful(true);
@@ -21,7 +22,6 @@ function Register(props) {
             });
     }
 
-    const {message} = props;
     return (
         <Form onSubmit={handleRegister} validate={validate} render={({handleSubmit}) => (
             <form className="form-signup" onSubmit={handleSubmit}>
@@ -62,11 +62,4 @@ function Register(props) {
     );
 }
 
-function mapStateToProps(state) {
-    const {message} = state.message;
-    return {
-        message,
-    };
-}
-
-export default connect(mapStateToProps)(Register);
+export default Register;

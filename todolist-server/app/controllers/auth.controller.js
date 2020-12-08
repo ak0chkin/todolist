@@ -66,7 +66,11 @@ exports.signin = async (request, response) => {
             expiresIn: 86400
         });
         response.status(200).send({
-            ...result.dataValues,
+            id: result.dataValues.id,
+            username: result.dataValues.username,
+            surname: result.dataValues.surname,
+            name: result.dataValues.name,
+            headId: result.dataValues.headId,
             accessToken: token
         });
     } catch (error) {

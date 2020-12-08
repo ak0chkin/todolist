@@ -1,10 +1,10 @@
 import React from "react";
 import {Container} from "react-bootstrap";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 
 function Profile(props) {
-    const {user: currentUser} = props;
+    const {user: currentUser} = useSelector(state => state.auth);
 
     if (!currentUser) {
         return <Redirect to="/login"/>;
@@ -18,14 +18,6 @@ function Profile(props) {
                 <strong>Имя пользователя:</strong>{" "}
                 {currentUser.username}
             </p>
-            <p>
-                <strong>Идентификатор:</strong>{" "}
-                {currentUser.id}
-            </p>
-            <p>
-                <strong>Token:</strong>{" "}
-                {currentUser.accessToken}
-            </p>
             {currentUser.headId && <p>
                 <strong>Руководитель:</strong>{" "}
                 {currentUser.headId}
@@ -34,11 +26,4 @@ function Profile(props) {
     );
 }
 
-function mapStateToProps(state) {
-    const {user} = state.auth;
-    return {
-        user,
-    };
-}
-
-export default connect(mapStateToProps)(Profile);
+export default Profile;

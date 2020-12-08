@@ -4,18 +4,24 @@ import validate from "./validate";
 import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
 import {datePickerAdapter, inputAdapter, selectAdapter} from "../../Fields";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import moment from "moment";
 import {priorityOptions, statusOptions} from "../../../constants/dropDowns";
 
 function TaskForm(props) {
-    const {handleSubmit, taskToUpdate, successful, message} = props;
+    const {message} = useSelector(state => state.message);
+    const {handleSubmit, taskToUpdate, performers, successful} = props;
+
+    const performerOptions = [<option key={'none'} style={{display: 'none'}}/>, ...performers.map(item => (
+        <option key={item} value={item}>{item}</option>
+    ))];
+
     return (
         <Form onSubmit={handleSubmit} validate={validate}
               initialValues={taskToUpdate ? {
                   ...taskToUpdate,
                   expiresAt: moment(taskToUpdate.expiresAt).toDate(),
-                  responsible: taskToUpdate.responsible.username
+                  performer: taskToUpdate.performer.username
               } : {}}
               render={({handleSubmit}) => (
                   <form className="form-task" onSubmit={handleSubmit}>
@@ -33,15 +39,18 @@ function TaskForm(props) {
                                          label="Дата окончания"/>
                               </Row>
                               <Row>
-                                  <Field name="priority" component={selectAdapter} options={priorityOptions} label="Приоритет"/>
+                                  <Field name="priority" component={selectAdapter} options={priorityOptions}
+                                         label="Приоритет"/>
                               </Row>
                               {taskToUpdate && (
                                   <Row>
-                                      <Field name="status" component={selectAdapter} options={statusOptions} label="Статус"/>
+                                      <Field name="status" component={selectAdapter} options={statusOptions}
+                                             label="Статус"/>
                                   </Row>
                               )}
                               <Row>
-                                  <Field name="responsible" component={inputAdapter} type="text" label="Ответственный"/>
+                                  <Field name="performer" component={selectAdapter} options={performerOptions}
+                                         label="Ответственный"/>
                               </Row>
                           </>
                       )}
@@ -61,11 +70,4 @@ function TaskForm(props) {
     );
 }
 
-function mapStateToProps(state) {
-    const {message} = state.message;
-    return {
-        message,
-    };
-}
-
-export default connect(mapStateToProps)(TaskForm);
+export default TaskForm;

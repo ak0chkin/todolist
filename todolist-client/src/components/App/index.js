@@ -6,22 +6,24 @@ import Register from "../Auth/Register";
 import Profile from "../Auth/Profile";
 import Home from "../Home";
 import Board from "../Task/Board";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../actions/auth";
 import {clearMessage} from "../../actions/message";
-import {Nav, Navbar, Container} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import './index.css';
 
 function App(props) {
-    const {user: currentUser} = props;
+    const dispatch = useDispatch();
+    const {user: currentUser} = useSelector(state => state.auth);
 
     function logOut() {
-        props.dispatch(logout());
+        dispatch(logout());
     }
 
     props.history.listen(() => {
-        props.dispatch(clearMessage());
+        dispatch(clearMessage());
     });
+    
     return (
         <>
             <Navbar bg="dark" variant="dark" expand>
@@ -87,11 +89,4 @@ function App(props) {
     );
 }
 
-function mapStateToProps(state) {
-    const {user} = state.auth;
-    return {
-        user,
-    };
-}
-
-export default connect(mapStateToProps)(withRouter(App));
+export default (withRouter(App));

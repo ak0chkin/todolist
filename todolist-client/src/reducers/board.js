@@ -1,7 +1,8 @@
-import {TASK_GET_ALL_SUCCESS} from "../constants/actionTypes";
+import {GET_BOARD_SUCCESS} from "../constants/actionTypes";
 
 
 const initialState = {
+    performers: [],
     tasks: [],
 };
 
@@ -10,8 +11,8 @@ export default function (state = initialState, action) {
     const {type, payload} = action;
 
     switch (type) {
-        case TASK_GET_ALL_SUCCESS:
-            return {tasks: payload};
+        case GET_BOARD_SUCCESS:
+            return payload;
 
         default:
             return state;

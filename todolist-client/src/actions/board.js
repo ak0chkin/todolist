@@ -1,8 +1,8 @@
-import TaskService from "../services/task.service";
-import {SET_MESSAGE, TASK_GET_ALL_SUCCESS} from "../constants/actionTypes";
+import BoardService from "../services/board.service";
+import {SET_MESSAGE, GET_BOARD_SUCCESS} from "../constants/actionTypes";
 
-export const create = (values) => (dispatch) => {
-    return TaskService.create(values)
+export const createTask = (values) => (dispatch) => {
+    return BoardService.createTask(values)
         .then((response) => {
             dispatch({
                 type: SET_MESSAGE,
@@ -12,19 +12,17 @@ export const create = (values) => (dispatch) => {
             return Promise.resolve();
         })
         .catch((error) => {
-            const message = error.response.data.message
-
             dispatch({
                 type: SET_MESSAGE,
-                payload: message,
+                payload: error.response.data.message,
             });
 
             return Promise.reject();
         });
 };
 
-export const update = (values) => (dispatch) => {
-    return TaskService.update(values)
+export const updateTask = (values) => (dispatch) => {
+    return BoardService.updateTask(values)
         .then((response) => {
             dispatch({
                 type: SET_MESSAGE,
@@ -34,30 +32,27 @@ export const update = (values) => (dispatch) => {
             return Promise.resolve();
         })
         .catch((error) => {
-            const message = error.response.data.message
-
             dispatch({
                 type: SET_MESSAGE,
-                payload: message,
+                payload: error.response.data.message,
             });
 
             return Promise.reject();
         });
 };
 
-export const getAll = (user) => (dispatch) => {
-    return TaskService.getAll(user)
+export const getBoard = () => (dispatch) => {
+    return BoardService.getBoard()
         .then((response) => {
             dispatch({
-                type: TASK_GET_ALL_SUCCESS,
+                type: GET_BOARD_SUCCESS,
                 payload: response.data
             });
         })
         .catch((error) => {
-            const message = error.response.data.message
             dispatch({
                 type: SET_MESSAGE,
-                payload: message,
+                payload: error.response.data.message,
             });
         })
 }

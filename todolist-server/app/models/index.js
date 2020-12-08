@@ -41,7 +41,7 @@ db.user.hasMany(db.task, {
 });
 
 db.user.hasMany(db.task, {
-    foreignKey: 'responsibleId',
+    foreignKey: 'performerId',
     as: 'appointed'
 });
 
@@ -49,7 +49,7 @@ db.task.belongsTo(db.user, {
     as: 'creator'
 });
 db.task.belongsTo(db.user, {
-    as: 'responsible'
+    as: 'performer'
 });
 
 module.exports = db;

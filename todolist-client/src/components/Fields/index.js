@@ -31,7 +31,8 @@ export const datePickerAdapter = ({input: {name, value, onChange}, label, meta: 
     <Col>
         <FormGroup>
             <FormLabel htmlFor={name}>{label}</FormLabel>
-            <DatePicker name={name} selected={value} onChange={date => onChange(date)} {...rest} locale="ru" dateFormat="dd/MM/yyyy" className="form-control" />
+            <DatePicker name={name} selected={value} onChange={date => onChange(date)} {...rest} locale="ru"
+                        dateFormat="dd/MM/yyyy" className="form-control"/>
             {touched && error && <span className="form-group__error">{error}</span>}
         </FormGroup>
     </Col>

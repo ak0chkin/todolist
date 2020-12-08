@@ -9,11 +9,11 @@ const validate = values => {
     if (!values['expiresAt']) {
         errors['expiresAt'] = 'Дата окончания не может быть пустой';
     }
-    if (!values['priority']) {
+    if (!values['priority'] && values['priority'] !== 0) {
         errors['priority'] = 'Приоритет не может быть пустым';
     }
-    if (!values['responsible']) {
-        errors['responsible'] = 'Ответственный не может быть пустым';
+    if (!values['performer']) {
+        errors['performer'] = 'Ответственный не может быть пустым';
     }
     return errors;
 }

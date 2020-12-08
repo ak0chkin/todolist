@@ -5,14 +5,14 @@ import "./index.css";
 import {Alert, Button, FormGroup, Row} from "react-bootstrap";
 import {inputAdapter} from "../../Fields";
 import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../../actions/auth";
 
 function Login(props) {
-    const {isLoggedIn, message} = props;
+    const dispatch = useDispatch();
+    const {auth: {isLoggedIn}, message: {message}} = useSelector(state => state);
 
-    async function handleLogin(values) {
-        const {dispatch} = props;
+    function handleLogin(values) {
         dispatch(login(values))
             .catch(() => {
             });
@@ -44,13 +44,4 @@ function Login(props) {
     );
 }
 
-function mapStateToProps(state) {
-    const {isLoggedIn} = state.auth;
-    const {message} = state.message;
-    return {
-        isLoggedIn,
-        message
-    };
-}
-
-export default connect(mapStateToProps)(Login);
+export default Login;
