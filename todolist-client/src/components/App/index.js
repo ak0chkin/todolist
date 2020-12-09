@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, Route, Switch, withRouter} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "../Auth/Login";
@@ -20,9 +20,11 @@ function App(props) {
         dispatch(logout());
     }
 
-    props.history.listen(() => {
-        dispatch(clearMessage());
-    });
+    useEffect(() =>{
+        props.history.listen(() => {
+            dispatch(clearMessage());
+        });
+    }, [dispatch, props.history]);
     
     return (
         <>

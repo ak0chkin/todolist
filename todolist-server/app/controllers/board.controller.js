@@ -7,7 +7,7 @@ exports.createTask = async (request, response) => {
     try {
         const result = await db.sequelize.transaction(async (transaction) => {
             const performer = await User.findOne({
-                attributes: ["id"],
+                attributes: ["id", "headId"],
                 where: {
                     username: request.body.performer,
                 },
@@ -17,7 +17,7 @@ exports.createTask = async (request, response) => {
                 response.status(404);
                 throw new Error("Ответственный не найден.")
             }
-            if (performer.headId !== request.userId) {
+            if (performer.headId !== request.userId && performer.id !== request.userId) {
                 response.status(401);
                 throw new Error("Недостаточно прав!");
             }
@@ -45,7 +45,7 @@ exports.createTask = async (request, response) => {
 
 exports.updateTask = async (request, response) => {
     try {
-        const result = await db.sequelize.transaction(async (transaction) => {
+        await db.sequelize.transaction(async (transaction) => {
             const task = await Task.findOne({
                 where: {
                     id: request.query.id,
@@ -57,6 +57,7 @@ exports.updateTask = async (request, response) => {
                 throw new Error("Задача не найдена.");
             }
             const performer = await User.findOne({
+                attributes: ["id", "headId"],
                 where: {
                     username: request.body.performer,
                 },
@@ -65,6 +66,10 @@ exports.updateTask = async (request, response) => {
             if (!performer) {
                 response.status(404);
                 throw new Error("Ответственный не найден.");
+            }
+            if (performer.headId !== request.userId && performer.id !== request.userId) {
+                response.status(401);
+                throw new Error("Недостаточно прав!");
             }
             if (task.creatorId === request.userId) {
                 await task.update({
