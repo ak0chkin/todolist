@@ -5,7 +5,7 @@ import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import Profile from "../Auth/Profile";
 import Home from "../Home";
-import Board from "../Task/Board";
+import Board from "../Board";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../actions/auth";
 import {clearMessage} from "../../actions/message";
