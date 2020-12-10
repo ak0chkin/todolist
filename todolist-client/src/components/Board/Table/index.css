@@ -18,3 +18,15 @@
 .table thead {
     border-bottom: 1px solid #F0F0F0;
 }
+
+.title_red {
+    color: #f44336;
+}
+
+.title_green {
+    color: #46bf85;
+}
+
+.title_grey {
+    color: #808080;
+}

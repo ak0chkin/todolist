@@ -9,9 +9,9 @@ import moment from "moment";
 import {priorityOptions, statusOptions} from "../../../constants/dropDowns";
 
 function TaskForm(props) {
-    const {message} = useSelector(state => state.message);
+    const {message: {message}, auth: {user: currentUser}} = useSelector(state => state);
     const {handleSubmit, taskToUpdate, performers, successful} = props;
-
+    const limitation = taskToUpdate ? taskToUpdate.creatorId === currentUser.id : true;
     const performerOptions = [<option key={'none'} style={{display: 'none'}}/>, ...performers.map(item => (
         <option key={item} value={item}>{item}</option>
     ))];
@@ -29,18 +29,18 @@ function TaskForm(props) {
                           <>
                               <Field component="input" type="hidden" name="id"/>
                               <Row>
-                                  <Field name="title" component={inputAdapter} type="text" label="Заголовок"/>
+                                  <Field name="title" component={inputAdapter} type="text" label="Заголовок" disabled={!limitation}/>
                               </Row>
                               <Row>
-                                  <Field name="description" component={inputAdapter} type="text" label="Описание"/>
+                                  <Field name="description" component={inputAdapter} type="textarea" label="Описание" disabled={!limitation} as="textarea"/>
                               </Row>
                               <Row>
                                   <Field name="expiresAt" component={datePickerAdapter} type="text"
-                                         label="Дата окончания"/>
+                                         label="Дата окончания" disabled={!limitation}/>
                               </Row>
                               <Row>
                                   <Field name="priority" component={selectAdapter} options={priorityOptions}
-                                         label="Приоритет"/>
+                                         label="Приоритет" disabled={!limitation}/>
                               </Row>
                               {taskToUpdate && (
                                   <Row>
@@ -50,7 +50,7 @@ function TaskForm(props) {
                               )}
                               <Row>
                                   <Field name="performer" component={selectAdapter} options={performerOptions}
-                                         label="Ответственный"/>
+                                         label="Ответственный" disabled={!limitation}/>
                               </Row>
                           </>
                       )}

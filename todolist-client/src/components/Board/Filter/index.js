@@ -1,15 +1,17 @@
 import React from "react";
-import  {FormCheck, Dropdown} from "react-bootstrap";
+import {Dropdown, FormCheck} from "react-bootstrap";
 import "./index.css";
 
-const CustomItem = ({type, id, label, name, className, style, handleFilter }) => (
-    <FormCheck type={type} id={id} name={name} label={label} className={className} style={style}/>
+const CustomItem = ({type, id, label, name, className, style, handleFilter}) => (
+    <FormCheck type={type} id={id} name={name} label={label} onChange={handleFilter} className={className}
+               style={style}/>
 )
 
 function TaskFilter(props) {
-    const {performers} = props;
+    const {performers, handleFilter} = props;
     const performerCheckboxes = performers.map(item => (
-        <Dropdown.Item as={CustomItem} type="checkbox" id={item} name="performer" label={item}/>
+        <Dropdown.Item key={item} as={CustomItem} type="checkbox" id={item} name="performer" label={item}
+                       handleFilter={handleFilter}/>
     ));
 
     return (
@@ -20,9 +22,14 @@ function TaskFilter(props) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item as={CustomItem} type="radio" id="0" name="expiresAt" label="Сегодня"/>
-                    <Dropdown.Item as={CustomItem} type="radio" id="1" name="expiresAt" label="Неделя"/>
-                    <Dropdown.Item as={CustomItem} type="radio" id="2" name="expiresAt" label="Будущее"/>
+                    <Dropdown.Item as={CustomItem} type="radio" id="all" name="expiresAt" label="Все"
+                                   handleFilter={handleFilter}/>
+                    <Dropdown.Item as={CustomItem} type="radio" id="today" name="expiresAt" label="Сегодня"
+                                   handleFilter={handleFilter}/>
+                    <Dropdown.Item as={CustomItem} type="radio" id="week" name="expiresAt" label="Неделя"
+                                   handleFilter={handleFilter}/>
+                    <Dropdown.Item as={CustomItem} type="radio" id="future" name="expiresAt" label="Будущее"
+                                   handleFilter={handleFilter}/>
                 </Dropdown.Menu>
             </Dropdown>
             <Dropdown>

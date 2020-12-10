@@ -7,7 +7,7 @@
 }
 
 .filter-row h5 {
-    color: rgba(0,0,0,.5);
+    color: rgba(0, 0, 0, .5);
     margin-left: .5rem;
     margin-bottom: 0;
 }
@@ -21,7 +21,7 @@
 .btn-filter {
     background-color: #F0F0F0;
     border-color: #F0F0F0;
-    color: rgba(0,0,0,.5);
+    color: #808080;
 }
 
 .btn-filter:hover,
@@ -29,6 +29,6 @@
 .btn-filter:focus {
     background-color: #E2E2E2 !important;
     border-color: #E2E2E2 !important;
-    color: rgba(0,0,0,.5) !important;
+    color: rgba(0, 0, 0, .5) !important;
     box-shadow: none !important;
 }

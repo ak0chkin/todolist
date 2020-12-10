@@ -3,27 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router";
 import TaskModal from "./Modal";
 import {createTask, getBoard, updateTask} from "../../actions/board";
-import {Row,Button, Container} from "react-bootstrap";
+import {Button, Container, Row} from "react-bootstrap";
 import "./index.css"
 import {clearMessage} from "../../actions/message";
 import TaskTable from "./Table";
 import TaskFilter from "./Filter";
 
 function Board(props) {
-    const {auth: {user: currentUser}, board: {performers, tasks}} = useSelector(state => state);
-    const [taskToUpdate, setTaskToUpdate] = useState({});
-    const [showModal, setShowModal] = useState(false);
-    const [successful, setSuccessful] = useState(false);
-    const dispatch = useDispatch();
-
-    useLayoutEffect(() => {
-        if (currentUser) {
-            dispatch(getBoard())
-                .catch(() => {
-                });
-        }
-    }, [dispatch, currentUser])
-
     function handleClose() {
         setShowModal(false);
         dispatch(clearMessage());
@@ -51,18 +37,60 @@ function Board(props) {
             });
     }
 
+    function handleFilter(e) {
+        switch (e.target.getAttribute('name')) {
+            case 'performer':
+                if (e.target.checked)
+                    setTaskFilter(state => ({
+                        ...state,
+                        performers: [e.target.id, ...state.performers],
+                    }));
+                else {
+                    setTaskFilter(state => ({
+                        ...state,
+                        performers: state.performers.filter(item => item !== e.target.id),
+                    }));
+                }
+                break;
+            case 'expiresAt':
+                setTaskFilter(state => ({
+                    ...state,
+                    expiresAt: e.target.id,
+                }));
+                break;
+            default:
+                break;
+        }
+    }
+
+    const {auth: {user: currentUser}, board: {performers, tasks}} = useSelector(state => state);
+    const [taskToUpdate, setTaskToUpdate] = useState({});
+    const [showModal, setShowModal] = useState(false);
+    const [successful, setSuccessful] = useState(false);
+    const [taskFilter, setTaskFilter] = useState({performers: [], expiresAt: ''});
+    const dispatch = useDispatch();
+
+    useLayoutEffect(() => {
+        if (currentUser) {
+            dispatch(getBoard())
+                .catch(() => {
+                });
+        }
+    }, [dispatch, currentUser])
+
     if (!currentUser) {
         return (<Redirect to="/login"/>);
     }
     return (
         <Container>
             <TaskModal handleSubmit={taskToUpdate ? handleUpdate : handleCreate}
-                       handleClose={handleClose} performers={[currentUser.username, ...performers]} taskToUpdate={taskToUpdate}
+                       handleClose={handleClose} performers={[currentUser.username, ...performers]}
+                       taskToUpdate={taskToUpdate}
                        show={showModal} successful={successful}/>
             <Row className="filter-row">
                 <h5>Задачи:</h5>
                 <Row className="filter-row__control ml-auto">
-                    <TaskFilter performers={performers}/>
+                    <TaskFilter handleFilter={handleFilter} performers={[currentUser.username, ...performers]}/>
                     <div>
                         <Button className="btn-filter" size="sm" onClick={handleShow}>
                             Новая задача
@@ -72,7 +100,7 @@ function Board(props) {
 
 
             </Row>
-            <TaskTable tasks={tasks} handleShow={handleShow}/>
+            <TaskTable tasks={tasks} filter={taskFilter} handleShow={handleShow}/>
         </Container>
     );
 }

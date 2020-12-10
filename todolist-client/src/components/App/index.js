@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../actions/auth";
 import {clearMessage} from "../../actions/message";
 import {Container, Nav, Navbar} from "react-bootstrap";
-import './index.css';
+import "./index.css";
 
 function App(props) {
     const dispatch = useDispatch();
@@ -20,12 +20,12 @@ function App(props) {
         dispatch(logout());
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         props.history.listen(() => {
             dispatch(clearMessage());
         });
     }, [dispatch, props.history]);
-    
+
     return (
         <>
             <Navbar bg="light" variant="light" expand>

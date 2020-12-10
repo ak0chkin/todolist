@@ -1,11 +1,11 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/board/";
+const API_URL = 'http://localhost:8080/api/board/';
 
 class BoardService {
     createTask({title, description, expiresAt, priority, performer}) {
-        return axios.post(API_URL + "createTask", {
+        return axios.post(API_URL + 'createTask', {
             title,
             description,
             expiresAt,
@@ -16,7 +16,7 @@ class BoardService {
 
     updateTask({id, title, description, expiresAt, priority, status, performer}) {
         console.log(expiresAt)
-        return axios.put(API_URL + "updateTask", {
+        return axios.put(API_URL + 'updateTask', {
             title,
             description,
             expiresAt,
@@ -30,7 +30,7 @@ class BoardService {
     }
 
     getBoard() {
-        return axios.get(API_URL + "getBoard", {headers: authHeader()});
+        return axios.get(API_URL + 'getBoard', {headers: authHeader()});
     }
 }
 

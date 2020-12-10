@@ -1,5 +1,5 @@
 import BoardService from "../services/board.service";
-import {SET_MESSAGE, GET_BOARD_SUCCESS, CREATE_TASK_SUCCESS, UPDATE_TASK_SUCCESS} from "../constants/actionTypes";
+import {CREATE_TASK_SUCCESS, GET_BOARD_SUCCESS, SET_MESSAGE, UPDATE_TASK_SUCCESS} from "../constants/actionTypes";
 
 export const createTask = (values) => (dispatch) => {
     return BoardService.createTask(values)

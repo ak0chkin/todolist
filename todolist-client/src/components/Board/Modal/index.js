@@ -10,7 +10,8 @@ export default function TaskModal(props) {
                 <Modal.Title>{taskToUpdate ? "Редактировать задачу" : "Создать задачу"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <TaskForm handleSubmit={handleSubmit} taskToUpdate={taskToUpdate} performers={performers} successful={successful}/>
+                <TaskForm handleSubmit={handleSubmit} taskToUpdate={taskToUpdate} performers={performers}
+                          successful={successful}/>
             </Modal.Body>
         </Modal>
     );
