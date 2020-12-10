@@ -2,6 +2,7 @@ import React from "react";
 import {priorities, statuses} from "../../../constants/dropDowns";
 import moment from "moment";
 import {Table} from "react-bootstrap";
+import "./index.css"
 
 function TaskTable(props) {
     const {tasks, handleShow} = props;
@@ -10,7 +11,7 @@ function TaskTable(props) {
         <tr key={id} onClick={() => {
             handleShow(id)
         }}>
-            <th scope="row">{title}</th>
+            <td>{title}</td>
             <td>{priorities[priority]}</td>
             <td>{moment(expiresAt).format("DD/MM/yyyy")}</td>
             <td>{performer.username}</td>

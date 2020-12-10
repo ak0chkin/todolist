@@ -6,3 +6,18 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.dropdown-item:hover, .dropdown-item:focus,
+.dropdown-item.active, .dropdown-item:active {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.show > .btn-filter.dropdown-toggle,
+.btn-filter.dropdown-toggle:focus {
+    background-color: #E2E2E2;
+    border-color: #E2E2E2;
+    color: rgba(0,0,0,.5);
+    box-shadow: none !important;
+}

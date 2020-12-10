@@ -1,0 +1,20 @@
+.table-hover tbody tr:hover {
+    cursor: pointer;
+    background-color: #F0F0F0;
+}
+
+.table {
+    table-layout: fixed;
+    border: 1px solid #F0F0F0;
+}
+
+.table th,
+.table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table thead {
+    border-bottom: 1px solid #F0F0F0;
+}

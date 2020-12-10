@@ -28,7 +28,7 @@ function App(props) {
     
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand>
+            <Navbar bg="light" variant="light" expand>
                 <Link to={"/"} className="navbar-brand">
                     /
                 </Link>

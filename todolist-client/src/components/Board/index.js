@@ -3,18 +3,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router";
 import TaskModal from "./Modal";
 import {createTask, getBoard, updateTask} from "../../actions/board";
-import {Button, Container} from "react-bootstrap";
+import {Row,Button, Container} from "react-bootstrap";
 import "./index.css"
 import {clearMessage} from "../../actions/message";
 import TaskTable from "./Table";
 import TaskFilter from "./Filter";
 
 function Board(props) {
+    const {auth: {user: currentUser}, board: {performers, tasks}} = useSelector(state => state);
     const [taskToUpdate, setTaskToUpdate] = useState({});
     const [showModal, setShowModal] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const dispatch = useDispatch();
-    const {auth: {user: currentUser}, board: {performers, tasks}} = useSelector(state => state);
 
     useLayoutEffect(() => {
         if (currentUser) {
@@ -65,12 +65,19 @@ function Board(props) {
             <TaskModal handleSubmit={taskToUpdate ? handleUpdate : handleCreate}
                        handleClose={handleClose} performers={[currentUser.username, ...performers]} taskToUpdate={taskToUpdate}
                        show={showModal} successful={successful}/>
+            <Row className="filter-row">
+                <h5>Задачи:</h5>
+                <Row className="filter-row__control ml-auto">
+                    <TaskFilter performers={performers}/>
+                    <div>
+                        <Button className="btn-filter" size="sm" onClick={handleShow}>
+                            Новая задача
+                        </Button>
+                    </div>
+                </Row>
 
-            <h3>Задачи:</h3>
-            <TaskFilter performers={performers}/>
-            <Button variant="primary" className="ml-auto" onClick={handleShow}>
-                Новая задача
-            </Button>
+
+            </Row>
             <TaskTable tasks={tasks} handleShow={handleShow}/>
         </Container>
     );
