@@ -34,7 +34,7 @@ exports.createTask = async (request, response) => {
                     transaction,
                 });
         });
-        response.status(200).send({message: "Задача успешно создана!", task: result});
+        response.status(200).send({message: "Задача успешно создана!", task: {...result.dataValues, performer: {username: request.body.performer}}});
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);
@@ -97,7 +97,7 @@ exports.updateTask = async (request, response) => {
             }
 
         });
-        response.status(200).send({message: "Задача успешно обновлена!", task: result});
+        response.status(200).send({message: "Задача успешно обновлена!", task: {...result.dataValues, performer: {username: request.body.performer}}});
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);
