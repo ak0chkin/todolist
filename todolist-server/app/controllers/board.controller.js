@@ -34,7 +34,7 @@ exports.createTask = async (request, response) => {
                     transaction,
                 });
         });
-        response.status(200).send({message: "Задача успешно создана!", result});
+        response.status(200).send({message: "Задача успешно создана!", task: result});
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);
@@ -45,7 +45,7 @@ exports.createTask = async (request, response) => {
 
 exports.updateTask = async (request, response) => {
     try {
-        await db.sequelize.transaction(async (transaction) => {
+        const result = await db.sequelize.transaction(async (transaction) => {
             const task = await Task.findOne({
                 where: {
                     id: request.query.id,
@@ -72,7 +72,7 @@ exports.updateTask = async (request, response) => {
                 throw new Error("Недостаточно прав!");
             }
             if (task.creatorId === request.userId) {
-                await task.update({
+                return await task.update({
                         title: request.body.title,
                         description: request.body.description,
                         expiresAt: request.body.expiresAt,
@@ -84,10 +84,11 @@ exports.updateTask = async (request, response) => {
                         transaction,
                     });
             } else if (task.performerId === request.userId) {
-                await task.update({
+                return await task.update({
                         status: request.body.status,
                     },
                     {
+                        returning: true,
                         transaction,
                     });
             } else {
@@ -95,9 +96,8 @@ exports.updateTask = async (request, response) => {
                 throw new Error("Недостаточно прав!");
             }
 
-            return task;
         });
-        response.status(200).send({message: "Задача успешно обновлена!"});
+        response.status(200).send({message: "Задача успешно обновлена!", task: result});
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);

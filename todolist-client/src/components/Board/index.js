@@ -39,9 +39,6 @@ function Board(props) {
         dispatch(createTask({...values, 'creatorId': currentUser.id}))
             .then(() => {
                 setSuccessful(true);
-                dispatch(getBoard())
-                    .catch(() => {
-                    });
             })
             .catch(() => {
             });
@@ -51,9 +48,6 @@ function Board(props) {
         dispatch(updateTask(values))
             .then(() => {
                 setSuccessful(true);
-                dispatch(getBoard())
-                    .catch(() => {
-                    });
             });
     }
 

@@ -1,5 +1,5 @@
 import BoardService from "../services/board.service";
-import {SET_MESSAGE, GET_BOARD_SUCCESS} from "../constants/actionTypes";
+import {SET_MESSAGE, GET_BOARD_SUCCESS, CREATE_TASK_SUCCESS, UPDATE_TASK_SUCCESS} from "../constants/actionTypes";
 
 export const createTask = (values) => (dispatch) => {
     return BoardService.createTask(values)
@@ -8,6 +8,11 @@ export const createTask = (values) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: response.data.message,
             });
+
+            dispatch({
+                type: CREATE_TASK_SUCCESS,
+                payload: response.data.task,
+            })
 
             return Promise.resolve();
         })
@@ -28,6 +33,11 @@ export const updateTask = (values) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: response.data.message,
             });
+
+            dispatch({
+                type: UPDATE_TASK_SUCCESS,
+                payload: response.data.task,
+            })
 
             return Promise.resolve();
         })
