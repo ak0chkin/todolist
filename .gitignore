@@ -1,15 +1,14 @@
 # dependencies
-/todolist-server/node_modules/
-/todolist-server/.idea/
-/todolist-client/.idea/
-/todolist-client/node_modules/
+/api/node_modules/
+/api/.idea/
+/client/.idea/
+/client/node_modules/
 
 # testing
-/todolist-client/coverage
+/client/coverage
 
 # production
-/todolist-client/build
+/client/build
 
-/todolist-server/.idea/
-/todolist-client/.idea/
+/node_modules/
 /.idea/
