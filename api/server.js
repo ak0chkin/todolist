@@ -17,9 +17,26 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
+app.get('/home/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+app.get('/login/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+app.get('/register/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+app.get('/profile/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 app.get('/board/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
 
 const db = require("./app/config/db.config");
 
@@ -29,7 +46,7 @@ db.sequelize.sync().then(() => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+    console.log(Server is running on port ${PORT}.);
 });
 
 function initial() {
