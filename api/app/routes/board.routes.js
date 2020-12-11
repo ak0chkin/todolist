@@ -1,8 +1,8 @@
-const controller = require("../controllers/board.controller");
 const {authJwt} = require("../middleware");
+const controller = require("../controllers/board.controller");
 
 module.exports = function (app) {
-    app.use(function (request, response, next) {
+    app.use(function(request, response, next) {
         response.header(
             "Access-Control-Allow-Headers",
             "x-access-token, Origin, Content-Type, Accept"
@@ -10,11 +10,23 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/board/createTask",[authJwt.verifyToken], controller.createTask);
+    app.post(
+        "/api/board/createTask",
+        [authJwt.verifyToken],
+        controller.createTask);
 
-    app.put("/api/board/updateTask",[authJwt.verifyToken], controller.updateTask);
+    app.put(
+        "/api/board/updateTask",
+        [authJwt.verifyToken],
+        controller.updateTask);
 
-    app.get("/api/board/getTask",[authJwt.verifyToken], controller.getTask);
+    app.get(
+        "/api/board/getTask",
+        [authJwt.verifyToken],
+        controller.getTask);
 
-    app.get("/api/board/getBoard",[authJwt.verifyToken], controller.getBoard)
+    app.get(
+        "/api/board/getBoard",
+        [authJwt.verifyToken],
+        controller.getBoard);
 };

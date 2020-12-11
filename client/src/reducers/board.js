@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
 
     switch (type) {
         case GET_BOARD_SUCCESS:
-            return payload;
+            return {...payload};
 
         case CREATE_TASK_SUCCESS:
             return {
