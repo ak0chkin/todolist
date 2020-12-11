@@ -63,7 +63,7 @@ exports.signin = async (request, response) => {
         }
 
         const token = jwt.sign({id: result.id}, config.secret, {
-            expiresIn: 86400
+            expiresIn: 2592000
         });
         response.status(200).send({
             id: result.dataValues.id,
