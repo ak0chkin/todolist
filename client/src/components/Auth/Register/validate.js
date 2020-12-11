@@ -9,13 +9,13 @@ const validate = values => {
     if (!values['username']) {
         errors['username'] = 'Имя пользователя не может быть пустым';
     }
-    if(!(/^[\w_]{3,20}$/).test(values['username'])) {
+    if(!(/^[\w_-]{3,20}$/).test(values['username'])) {
         errors['username'] = 'Используйте буквы латинского алфавита, цифры, дефисы и подчёркивания (от 3 до 20 символов)'
     }
     if (!values['password']) {
         errors['password'] = 'Пароль не может быть пустым';
     }
-    if(!(/^[\w_]{3,20}$/).test(values['password'])) {
+    if(!(/^[\w_-]{3,20}$/).test(values['password'])) {
         errors['password'] = 'Используйте буквы латинского алфавита, цифры, дефисы и подчёркивания (от 3 до 20 символов)'
     }
 
