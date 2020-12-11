@@ -15,17 +15,16 @@ function TaskTable(props) {
                 return result;
             case "today":
                 return result.filter(item => (
-                    moment(item.expiresAt).isAfter(moment().add(-1, 'days'))
-                    && moment(item.expiresAt).isBefore(moment().add(1, 'days'))
+                    moment(item.expiresAt).isSame(moment(), 'day')
                 ));
             case "week":
                 return tasks.filter(item => (
-                    moment(item.expiresAt).isAfter(moment().add(-1, 'days'))
-                    && moment(item.expiresAt).isBefore(moment().add(6, 'days'))
+                    moment(item.expiresAt).isAfter(moment().add(-1, 'days'), 'day')
+                    && moment(item.expiresAt).isBefore(moment().add(6, 'days'), 'day')
                 ));
             case "future":
                 return tasks.filter(item => (
-                    moment(item.expiresAt).isAfter(moment().add(6, 'days'))
+                    moment(item.expiresAt).isAfter(moment().add(6, 'days'), 'day')
                 ));
             default:
                 return result;
@@ -39,7 +38,7 @@ function TaskTable(props) {
             <tr key={id} onClick={() => {
                 handleShow(id)
             }}>
-                <td className={status == 2 || status == 3 ? "title_green" : moment().isBefore(expiresAt) ? "title_grey" : "title_red"}>{title}</td>
+                <td className={status == 2 || status == 3 ? "title_green" : moment().isAfter(expiresAt, 'day') ? "title_red" : "title_grey"}>{title}</td>
                 <td>{priorities[priority]}</td>
                 <td>{moment(expiresAt).format("DD/MM/yyyy")}</td>
                 <td>{performer.username}</td>
