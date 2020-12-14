@@ -12,7 +12,7 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 const db = require("./app/models");
 
@@ -21,7 +21,7 @@ db.sequelize.sync().then(() => {
 });
 
 app.get("/", (request, response) => {
-    response.json({ message: "Welcome to kochkin-todolist application." });
+    response.json({message: "Welcome to kochkin-todolist application."});
 });
 
 require('./app/routes/auth.routes')(app);

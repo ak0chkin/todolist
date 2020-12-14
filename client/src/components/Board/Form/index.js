@@ -29,10 +29,12 @@ function TaskForm(props) {
                           <>
                               <Field component="input" type="hidden" name="id"/>
                               <Row>
-                                  <Field name="title" component={inputAdapter} type="text" label="Заголовок" disabled={!limitation}/>
+                                  <Field name="title" component={inputAdapter} type="text" label="Заголовок"
+                                         disabled={!limitation}/>
                               </Row>
                               <Row>
-                                  <Field name="description" component={inputAdapter} type="textarea" label="Описание" disabled={!limitation} as="textarea"/>
+                                  <Field name="description" component={inputAdapter} type="textarea" label="Описание"
+                                         disabled={!limitation} as="textarea"/>
                               </Row>
                               <Row>
                                   <Field name="expiresAt" component={datePickerAdapter} type="text"
