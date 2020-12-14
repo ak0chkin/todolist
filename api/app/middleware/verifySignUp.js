@@ -20,7 +20,7 @@ checkDuplicateUsername = (request, response, next) => {
 };
 
 const verifySignUp = {
-    checkDuplicateUsername: checkDuplicateUsername,
+    checkDuplicateUsername
 };
 
 module.exports = verifySignUp;

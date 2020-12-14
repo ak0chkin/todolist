@@ -1,8 +1,8 @@
-const {authJwt} = require("../middleware");
+const authJwt = require("../middleware/authJwt");
 const controller = require("../controllers/board.controller");
 
 module.exports = function (app) {
-    app.use(function(request, response, next) {
+    app.use(function (request, response, next) {
         response.header(
             "Access-Control-Allow-Headers",
             "x-access-token, Origin, Content-Type, Accept"

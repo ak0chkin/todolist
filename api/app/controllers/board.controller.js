@@ -34,7 +34,10 @@ exports.createTask = async (request, response) => {
                     transaction,
                 });
         });
-        response.status(200).send({message: "Задача успешно создана!", task: {...result.dataValues, performer: {username: request.body.performer}}});
+        response.status(200).send({
+            message: "Задача успешно создана!",
+            task: {...result.dataValues, performer: {username: request.body.performer}}
+        });
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);
@@ -83,7 +86,8 @@ exports.updateTask = async (request, response) => {
                     {
                         transaction,
                     });
-            } else if (task.performerId === request.userId) {
+            }
+            if (task.performerId === request.userId) {
                 return await task.update({
                         status: request.body.status,
                     },
@@ -91,13 +95,14 @@ exports.updateTask = async (request, response) => {
                         returning: true,
                         transaction,
                     });
-            } else {
-                response.status(401);
-                throw new Error("Недостаточно прав!");
             }
-
+            response.status(401);
+            throw new Error("Недостаточно прав!");
         });
-        response.status(200).send({message: "Задача успешно обновлена!", task: {...result.dataValues, performer: {username: request.body.performer}}});
+        response.status(200).send({
+            message: "Задача успешно обновлена!",
+            task: {...result.dataValues, performer: {username: request.body.performer}}
+        });
     } catch (error) {
         if (response.statusCode === 200) {
             response.status(500);
