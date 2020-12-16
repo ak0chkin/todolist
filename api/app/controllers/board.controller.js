@@ -51,7 +51,7 @@ exports.updateTask = async (request, response) => {
         const result = await db.sequelize.transaction(async (transaction) => {
             const task = await Task.findOne({
                 where: {
-                    id: request.query.id,
+                    id: request.params.id,
                 },
                 transaction,
             })
@@ -116,7 +116,7 @@ exports.getTask = async (request, response) => {
         const result = await db.sequelize.transaction(async (transaction) => {
             const task = await Task.findOne({
                 where: {
-                    id: request.query.id,
+                    id: request.params.id,
                 },
                 transaction,
             });

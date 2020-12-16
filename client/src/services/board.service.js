@@ -5,7 +5,7 @@ const API_URL = '/api/board/';
 
 class BoardService {
     createTask({title, description, expiresAt, priority, performer}) {
-        return axios.post(API_URL + 'createTask', {
+        return axios.post(API_URL + 'task', {
             title,
             description,
             expiresAt,
@@ -16,7 +16,7 @@ class BoardService {
 
     updateTask({id, title, description, expiresAt, priority, status, performer}) {
         console.log(expiresAt)
-        return axios.put(API_URL + 'updateTask', {
+        return axios.put(API_URL + 'task/' + id, {
             title,
             description,
             expiresAt,
@@ -24,13 +24,12 @@ class BoardService {
             status,
             performer
         }, {
-            params: {id},
             headers: authHeader()
         });
     }
 
     getBoard() {
-        return axios.get(API_URL + 'getBoard', {headers: authHeader()});
+        return axios.get(API_URL, {headers: authHeader()});
     }
 }
 
