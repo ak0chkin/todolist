@@ -10,11 +10,11 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/board/createTask", [authJwt.verifyToken], controller.createTask);
+    app.post("/api/board/task", [authJwt.verifyToken], controller.createTask);
 
-    app.put("/api/board/updateTask", [authJwt.verifyToken], controller.updateTask);
+    app.put("/api/board/task/:id", [authJwt.verifyToken], controller.updateTask);
 
-    app.get("/api/board/getTask", [authJwt.verifyToken], controller.getTask);
+    app.get("/api/board/task/:id", [authJwt.verifyToken], controller.getTask);
 
-    app.get("/api/board/getBoard", [authJwt.verifyToken], controller.getBoard)
+    app.get("/api/board", [authJwt.verifyToken], controller.getBoard)
 };
